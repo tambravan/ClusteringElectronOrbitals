@@ -21,8 +21,8 @@ def calcP1S0(r, theta, phi):
 def calcP2S0(r, theta, phi):
     psi = abs((1 / (4 * math.sqrt(2 * math.pi)) * a0 ** (3 / 2)) * (2 - r / a0) * math.e ** (-r / (2 * a0)))
     print(psi)
-    P = psi ** 2 * 4 * math.pi * r ** 2
-    return P
+    p = psi ** 2 * 4 * math.pi * r ** 2
+    return p
 
 
 # Wave funtion for (n, l, m) = (2, 1, 0)
@@ -30,8 +30,8 @@ def calcP2P0(r, theta, phi):
     psi = abs(
         (1 / (4 * math.sqrt(2 * math.pi)) * a0 ** (3 / 2)) * (r / a0) * math.e ** (-r / (2 * a0)) * math.cos(theta))
     print(psi)
-    P = psi ** 2 * 4 * math.pi * r ** 2
-    return P
+    p = psi ** 2 * 4 * math.pi * r ** 2
+    return p
 
 
 # Print statements to verify values
