@@ -13,14 +13,14 @@ a0 = 0.0529
 
 
 # r: 0 -> 10*a0, theta: 0-> pi, phi: 0 -> 2pi
-def check_prob(r, theta, phi, function):
+def check_prob(rmax, thetamax, phimax, function, threshold):
     # Create point and define x, y, z to be randoms within the proper range
     n = point()
-    n.r = random.uniform(0, 10 * a0)
-    n.theta = random.uniform(0, math.pi)
-    n.phi = random.uniform(0, 2 * math.pi)
+    n.r = random.uniform(0, rmax)
+    n.theta = random.uniform(0, thetamax)
+    n.phi = random.uniform(0, phimax)
 
-    return function(n.r, n.theta, n.phi) >= .85*max(function)
+    return function(n.r, n.theta, n.phi) >= threshold*max(function)
 
 
 # Takes a number of trials and a function, and checks how many random points are above max threshold
@@ -29,7 +29,7 @@ def mc_probability(trials, function):
     counter = 0
     for i in range(trials):
         # Fix additional zeros once check_prob is fully defined
-        if check_prob(0, 0, 0, function):
+        if check_prob(10 * a0, math.pi, 2 * math.pi, function, 0.85):
             counter += 1
 
     return counter / trials
