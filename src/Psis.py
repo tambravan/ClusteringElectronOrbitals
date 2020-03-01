@@ -13,8 +13,8 @@ a0 = 0.0529
 def calcP1S0(r, theta, phi):
     psi = abs((1 / (math.sqrt(math.pi) * (a0 ** (3 / 2)))) * math.e ** (-r / a0))
     print(psi)
-    P = psi ** 2 * 4 * math.pi * r ** 2
-    return P
+    p = psi ** 2 * 4 * math.pi * r ** 2
+    return p
 
 
 # Wave funtion for (n, l, m) = (2, 0, 0)
