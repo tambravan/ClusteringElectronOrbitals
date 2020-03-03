@@ -10,6 +10,7 @@ import random
 import math
 
 a0 = 0.0529
+solns = []
 
 
 # r: 0 -> 10*a0, theta: 0-> pi, phi: 0 -> 2pi
@@ -19,8 +20,8 @@ def is_above_max(rmax, thetamax, phimax, function, threshold):
     n.r = random.uniform(0, rmax)
     n.theta = random.uniform(0, thetamax)
     n.phi = random.uniform(0, phimax)
-
-    return function(n.r, n.theta, n.phi) >= threshold*max(function)
+    solns.append(n)
+    return function(n.r, n.theta, n.phi) >= threshold * max(function)
 
 
 # Takes a number of trials and a function, and checks how many random points are above max threshold
@@ -40,4 +41,3 @@ class point:
         self.r = 0
         self.theta = 0
         self.phi = 0
-
