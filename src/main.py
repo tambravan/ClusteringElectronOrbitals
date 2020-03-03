@@ -6,6 +6,7 @@
 # Check p at each orbital
 # If >85% of max, append the point to a tuple called solutions
 
+from src.max import max1S0, max2S0, max2P0
 import random
 import math
 
@@ -20,13 +21,14 @@ def is_above_max(rmax, thetamax, phimax, function, threshold):
     n.r = random.uniform(0, rmax)
     n.theta = random.uniform(0, thetamax)
     n.phi = random.uniform(0, phimax)
-    solns.append(n)
-    return function(n.r, n.theta, n.phi) >= threshold * max(function)
+    if function(n.r, n.theta, n.phi) >= threshold * max1S0 or function(n.r, n.theta, n.phi) >= threshold * max1S0 or function(n.r, n.theta, n.phi) >= threshold * max1S0:
+        solns.append(n)
+        return True
 
 
 # Takes a number of trials and a function, and checks how many random points are above max threshold
 # Using check_prob
-def mc_probability(trials, function):
+def mc_probability(trials):
     counter = 0
     for i in range(trials):
         # Fix additional zeros once check_prob is fully defined
