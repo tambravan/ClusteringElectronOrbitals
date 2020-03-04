@@ -89,10 +89,12 @@ a0 = 0.0529
 solns = []
 
 radii = sympy.solve((-1.02157 * 10 ** 6 * math.e ** (-37.8072 * r) * (r ** 2 - 0.0529 * r)), r)
-max1S0 = 0
+max1S0 = 10.233
 for radius in radii:
     if max1S0 < calcP1S0((complex(radius)).real, 0, 0):
         max1S0 = calcP1S0((complex(radius)).real, 0, 0)
+
+print("Max1s0 %s" % max1S0)
 #MANUAL:
 max2S0 = 3.6100 #at 3a0 + a0/(0.2*sqrt(5))
 max2P0 = 1.9585 #at 4a0, pi/4 or 3pi/4
@@ -133,7 +135,7 @@ class point:
         return "(%s, %s, %s)" % (self.r, self.theta, self.phi)
 
 
-mc_probability(1000)
+mc_probability(100000)
 for i in solns:
     print(i)
 
