@@ -177,8 +177,8 @@ def plot_Kmeans_clusters(ax, sample, label, k):
         ax.plot(data[:, 0], data[:, 1], colors[i])
 
 
-#Plot clusters
-fig,ax = plt.subplots(figsize=(8,8))
+# Plot clusters
+fig, ax = plt.subplots(figsize=(8,8))
 plot_Kmeans_clusters(ax, solns_as_nparray.astype(float), labels, num_clusters)
 plt.title("Clustering electron orbitals")
 plt.show()
