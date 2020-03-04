@@ -51,11 +51,20 @@ print(calcP2S0(0.27699, 0, 0))
 print("2P0")
 print(calcP2P0(0.2116, 0.61548, 0))
 
+Ps1S0=[]
+for i in range(1000):
+    r = i/1000
+    Ps1S0.append(calcP1S0(r,0,0))
+plt.plot(range(1000), Ps1S0)
+plt.title("1S0")
+plt.show()
+
 Ps2S0=[]
 for i in range(1000):
     r = i/1000
     Ps2S0.append(calcP2S0(r,0,0))
 plt.plot(range(1000), Ps2S0)
+plt.title("2S0")
 plt.show()
 
 Ps2P0=[]
@@ -63,6 +72,7 @@ for i in range(1000):
     r = i/1000
     Ps2P0.append(calcP2P0(r,math.pi/4,0))
 plt.plot(range(1000), Ps2P0)
+plt.title("2P0")
 plt.show()
 
 
@@ -107,7 +117,7 @@ def mc_probability(trials):
     counter = 0
     for i in range(trials):
         # Fix additional zeros once check_prob is fully defined
-        if is_above_max(10 * a0, math.pi, 2 * math.pi, 0.85):
+        if is_above_max(10 * a0, math.pi, 2 * math.pi, 0.99):
             counter += 1
 
     return counter / trials
@@ -126,3 +136,13 @@ class point:
 mc_probability(1000)
 for i in solns:
     print(i)
+
+Rs = []
+Thetas = []
+
+for i in solns:
+    Rs.append(i.r)
+    Thetas.append(i.theta)
+
+plt.scatter(Rs,Thetas)
+plt.show()
