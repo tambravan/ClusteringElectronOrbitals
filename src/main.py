@@ -127,8 +127,9 @@ def is_above_max(rmax, thetamax, phimax, threshold):
 # Using check_prob
 
 # #####NOTE#####
-# This function is totally unnecessary. Wenever use the return value and it can be replaced by a for loop of
-# is_above_max
+# This function is totally unnecessary. Whenever use the return value and it can be replaced by a for loop of
+# is_above_max. At least remove the return value and the counter variable
+# No need to change for project
 def mc_probability(trials):
     counter = 0
     for i in range(trials):
