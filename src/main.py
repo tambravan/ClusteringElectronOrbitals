@@ -11,6 +11,9 @@ import sympy
 import random
 import math
 import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.cluster import KMeans
+
 
 
 a0 = 0.0529
@@ -96,15 +99,14 @@ for radius in radii:
 
 print("Max1s0 %s" % max1S0)
 #MANUAL:
-max2S0 = 3.6100 #at 3a0 + a0/(0.2*sqrt(5))
-max2P0 = 1.9585 #at 4a0, pi/4 or 3pi/4
-
+max2S0 = 3.6100  # at 3a0 + a0/(0.2*sqrt(5))
+max2P0 = 1.9585  # at 4a0, pi/4 or 3pi/4
 
 
 # r: 0 -> 10*a0, theta: 0-> pi, phi: 0 -> 2pi
 def is_above_max(rmax, thetamax, phimax, threshold):
     # Create point and define x, y, z to be randoms within the proper range
-    n = point()
+    n = spherical_point()
     n.r = random.uniform(0, rmax)
     n.theta = random.uniform(0, thetamax)
     n.phi = random.uniform(0, phimax)
@@ -125,7 +127,8 @@ def mc_probability(trials):
     return counter / trials
 
 
-class point:
+# Class point to store (r, theta, phi) coordinates
+class spherical_point:
     def __init__(self):
         self.r = 0
         self.theta = 0
@@ -146,5 +149,36 @@ for i in solns:
     Rs.append(i.r)
     Thetas.append(i.theta)
 
+# Plot the scatter of solutions as (r, theta) points because they are phi symmetric
 plt.scatter(Rs,Thetas)
+plt.show()
+
+# #####################CLUSTERING#################
+
+num_clusters = 4
+
+# Convert solns to an np array of (r, theta, phi) points
+solns_as_nparray = []
+for i in solns:
+    solns_as_nparray.append((i.r, i.theta, i.phi))
+
+solns_as_nparray = np.array(solns_as_nparray)
+
+est = KMeans(n_clusters=num_clusters)
+est.fit(solns_as_nparray)
+labels = est.labels_
+
+
+# Function to plot clusters that kmeans has estimated
+def plot_Kmeans_clusters(ax, sample, label, k):
+    colors = ['bo', 'ro', 'go', 'mo']
+    for i in range(k):
+        data = sample[label == i]
+        ax.plot(data[:, 0], data[:, 1], colors[i])
+
+
+#Plot clusters
+fig,ax = plt.subplots(figsize=(8,8))
+plot_Kmeans_clusters(ax, solns_as_nparray.astype(float), labels, num_clusters)
+plt.title("Clustering electron orbitals")
 plt.show()
