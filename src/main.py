@@ -119,6 +119,10 @@ class point:
         self.theta = 0
         self.phi = 0
 
+    def __str__(self):
+        return "(%s, %s, %s)" % (self.r, self.theta, self.phi)
+
 
 mc_probability(1000)
-print(solns)
+for i in solns:
+    print(i)
